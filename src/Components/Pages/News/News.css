@@ -1,0 +1,15 @@
+.news {
+    padding: 24;
+}
+
+.news thead {
+    display: none !important;
+}
+
+.news .ant-card-body {
+    background-color: rgba(255, 230, 150, 1) !important;
+}
+
+.ant-table-pagination.ant-pagination {
+    margin: 16px;
+}
