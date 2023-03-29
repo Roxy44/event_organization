@@ -11,11 +11,11 @@ const TeamInfo = () => {
     const { id } = useParams();
     
     return (
-        <Layout className="site-layout">
-            <Header className="site-layout-background pageHeader">
+        <Layout className='site-layout'>
+            <Header className='site-layout-background pageHeader'>
                 <span className='headerTitle'>Team № {id}</span>
             </Header>
-            <Content className="site-layout-background" style={{padding: 24 }}>
+            <Content className='site-layout-background' style={{padding: 24 }}>
                 <Players />
             </Content>
         </Layout>

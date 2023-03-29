@@ -7,11 +7,11 @@ const { Header, Content } = Layout;
 
 const PlayerStats = () => {
     return (
-        <Layout className="site-layout">
-            <Header className="site-layout-background pageHeader">
+        <Layout className='site-layout'>
+            <Header className='site-layout-background pageHeader'>
                 <span className='headerTitle'>header</span>
             </Header>
-            <Content className="site-layout-background" style={{padding: 24 }}>
+            <Content className='site-layout-background' style={{padding: 24 }}>
                 <h1>hello</h1>
             </Content>
         </Layout>

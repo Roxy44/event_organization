@@ -1,5 +1,5 @@
 import { RoutesTypes } from '../types';
-import { CommentIcon, TeamIcon, FlagIcon, DribbbleIcon, SearchIcon }from '../icons';
+import { CommentIcon, TeamIcon, FlagIcon, DribbbleIcon, SearchIcon, PlusSquareIcon } from '../icons';
 
 const routesData: RoutesTypes = [
     {
@@ -25,6 +25,12 @@ const routesData: RoutesTypes = [
                 name: 'Teams',
                 path: '/Teams',
                 icon: TeamIcon(),
+            },
+            {
+                key: 1.4,
+                name: 'Organization',
+                path: '/Organization',
+                icon: PlusSquareIcon(),
             }
         ]
     }, 
@@ -51,21 +57,27 @@ const routesData: RoutesTypes = [
                 name: 'Teams',
                 path: '/Teams',
                 icon: TeamIcon(),
+            },
+            {
+                key: 2.4,
+                name: 'Organization',
+                path: '/Organization',
+                icon: PlusSquareIcon(),
             }
         ]
     },
-]
+];
 
 const defaultState = {
-	routesData,
+    routesData,
     activeTab: null,
-}
+};
 
 export const routeReducer = (state = defaultState, action: any) => {
-	switch(action.type) {
-		case 'SET_ACTIVETAB':
-			return { ...state, activeTab: action.payload };
-		default:
-			return state;
-	}
-}
+    switch(action.type) {
+    case 'SET_ACTIVETAB':
+        return { ...state, activeTab: action.payload };
+    default:
+        return state;
+    }
+};

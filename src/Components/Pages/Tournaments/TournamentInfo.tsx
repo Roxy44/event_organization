@@ -2,7 +2,7 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 
 import {
-	EditOutlined
+    EditOutlined
 } from '@ant-design/icons';
 
 import { Layout, Button } from 'antd';
@@ -15,11 +15,11 @@ const TournamentInfo = () => {
     const { id } = useParams();
     
     return (
-        <Layout className="site-layout">
-            <Header className="site-layout-background pageHeader">
+        <Layout className='site-layout'>
+            <Header className='site-layout-background pageHeader'>
                 <span className='headerTitle'>Tournament № {id}</span>
             </Header>
-            <Content className="site-layout-background" style={{padding: 24 }}>
+            <Content className='site-layout-background' style={{padding: 24 }}>
                 <Button type='primary' className='registration'>
                     <EditOutlined />
                     Register On Tournament

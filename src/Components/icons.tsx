@@ -1,27 +1,33 @@
 import {
-	CommentOutlined,
-	FlagOutlined,
-	TeamOutlined,
+    CommentOutlined,
+    FlagOutlined,
+    TeamOutlined,
     TrophyOutlined, 
     DribbbleOutlined,
     SearchOutlined,
+    PlusSquareOutlined,
 } from '@ant-design/icons';
 
 export function CommentIcon() {
-    return <CommentOutlined />
+    return <CommentOutlined />;
 }
 export function FlagIcon() {
-    return <FlagOutlined />
+    return <FlagOutlined />;
 }
 export function TeamIcon() {
-    return <TeamOutlined />
+    return <TeamOutlined />;
 }
 export function TrophyIcon() {
-    return <TrophyOutlined />
+    return <TrophyOutlined />;
 }
 export function DribbbleIcon() {
-    return <DribbbleOutlined />
+    return <DribbbleOutlined />;
 }
 export function SearchIcon() {
-    return <SearchOutlined />
+    return <SearchOutlined />;
 }
+
+export function PlusSquareIcon() {
+    return <PlusSquareOutlined />;
+}
+
