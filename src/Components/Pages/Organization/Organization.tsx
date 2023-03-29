@@ -14,7 +14,7 @@ import './Organization.css';
 const Organisation = () => {
     const [docId, setDocId] = useState('');
     const [commandScores, setScores] = useState({firstCommand: Number, secondCommand: Number});
-
+    
     const dispatch = useDispatch();
 
     const matchesCollectionRef = collection(db, 'tournamentsMatches');
