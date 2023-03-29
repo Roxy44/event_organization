@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/SportsEventOrganization/static/css/main.29acf859.css",
+    "main.js": "/SportsEventOrganization/static/js/main.ea1feb95.js",
+    "index.html": "/SportsEventOrganization/index.html",
+    "main.29acf859.css.map": "/SportsEventOrganization/static/css/main.29acf859.css.map",
+    "main.ea1feb95.js.map": "/SportsEventOrganization/static/js/main.ea1feb95.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.29acf859.css",
+    "static/js/main.ea1feb95.js"
+  ]
+}
