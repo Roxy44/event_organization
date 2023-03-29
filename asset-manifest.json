@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/SportsEventOrganization/static/css/main.29acf859.css",
-    "main.js": "/SportsEventOrganization/static/js/main.ea1feb95.js",
-    "index.html": "/SportsEventOrganization/index.html",
-    "main.29acf859.css.map": "/SportsEventOrganization/static/css/main.29acf859.css.map",
-    "main.ea1feb95.js.map": "/SportsEventOrganization/static/js/main.ea1feb95.js.map"
+    "main.css": "/SportsOrganization/static/css/main.29acf859.css",
+    "main.js": "/SportsOrganization/static/js/main.df5d9425.js",
+    "index.html": "/SportsOrganization/index.html",
+    "main.29acf859.css.map": "/SportsOrganization/static/css/main.29acf859.css.map",
+    "main.df5d9425.js.map": "/SportsOrganization/static/js/main.df5d9425.js.map"
   },
   "entrypoints": [
     "static/css/main.29acf859.css",
-    "static/js/main.ea1feb95.js"
+    "static/js/main.df5d9425.js"
   ]
 }
