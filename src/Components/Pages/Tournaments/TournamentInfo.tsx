@@ -12,19 +12,19 @@ import TableComponent from '../../CustomComponents/TableComponent/TableComponent
 const { Header, Content } = Layout;
 
 const TournamentInfo = () => {
-    const { id } = useParams();
+    const { name } = useParams();
     
     return (
         <Layout className='site-layout'>
             <Header className='site-layout-background pageHeader'>
-                <span className='headerTitle'>Tournament № {id}</span>
+                <span className='headerTitle'>{name}</span>
             </Header>
             <Content className='site-layout-background' style={{padding: 24 }}>
                 <Button type='primary' className='registration'>
                     <EditOutlined />
                     Register On Tournament
                 </Button>
-                <TableComponent />
+                <TableComponent tournamentName={name} />
             </Content>
         </Layout>
     );

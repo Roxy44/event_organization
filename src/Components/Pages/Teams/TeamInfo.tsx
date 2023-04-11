@@ -8,15 +8,15 @@ import Players from './Players/Players';
 const { Header, Content } = Layout;
 
 const TeamInfo = () => {
-    const { id } = useParams();
+    const { name } = useParams();
     
     return (
         <Layout className='site-layout'>
             <Header className='site-layout-background pageHeader'>
-                <span className='headerTitle'>Team № {id}</span>
+                <span className='headerTitle'>Team {name} roster: </span>
             </Header>
             <Content className='site-layout-background' style={{padding: 24 }}>
-                <Players />
+                <Players teamName={name} />
             </Content>
         </Layout>
     );

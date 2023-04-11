@@ -1,23 +1,20 @@
-import { applyMiddleware, combineReducers, createStore } from '@reduxjs/toolkit';
+import { combineReducers, createStore } from '@reduxjs/toolkit';
+
 import { routeReducer } from '../Components/Reducers/routeReducer';
+import { teamsReducer } from '../Components/Reducers/teamsReducer';
+
 import { organisationReducer } from '../Components/Reducers/organizationReducer';
-
-import createSagaMiddleware from '@redux-saga/core'; 
-
-import rootSaga from '../Components/Saga';
+import { tournamentsReducer } from '../Components/Reducers/tournamentsReducer';
 
 const rootReducer = combineReducers({
     routes: routeReducer,
     organization: organisationReducer,
+    teams: teamsReducer,
+    tournaments: tournamentsReducer,
 });
-
-const sagaMiddleware = createSagaMiddleware();
 
 export const store = createStore(
     rootReducer,
-    applyMiddleware(sagaMiddleware), 
 );
-
-sagaMiddleware.run(rootSaga);
 
 export type RootState = ReturnType<typeof store.getState>;

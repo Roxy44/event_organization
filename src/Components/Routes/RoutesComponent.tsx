@@ -12,13 +12,14 @@ import Organisation from '../Pages/Organization/Organization';
 const RoutesComponent = () => {
     return (
         <Routes>
+            <Route path='/SportsOrganization' element={<Authorization /> } />
             <Route path='/' element={<Authorization /> } />
-            <Route path='/News' element={<News /> } />
-            <Route path='/Tournaments' element={<Tournaments />} />
-            <Route path='/Tournaments/:id' element={<TournamentInfo />} />
-            <Route path='/Teams' element={<Teams />} />
-            <Route path='/Teams/:id' element={<TeamInfo />} />
-            <Route path='/Organization' element={<Organisation /> } />
+            <Route path='/SportsOrganization/News' element={<News /> } />
+            <Route path='/SportsOrganization/Tournaments' element={<Tournaments />} />
+            <Route path='/SportsOrganization/Tournaments/:name' element={<TournamentInfo />} />
+            <Route path='/SportsOrganization/Teams' element={<Teams />} />
+            <Route path='/SportsOrganization/Teams/:name' element={<TeamInfo />} />
+            <Route path='/SportsOrganization/Organization' element={<Organisation /> } />
         </Routes>
     );
 };

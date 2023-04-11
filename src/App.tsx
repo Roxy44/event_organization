@@ -22,36 +22,33 @@ const App = () => {
         dispatch({type: 'SET_ACTIVETAB', payload: activeTab});
     }; 
 
-    const dataMenu = 
-    <Menu theme='dark' mode='inline'>
-        <Menu.Item key='0' className='logo' icon={TrophyIcon()} >
-            <Link to='/'>Sport Organisation</Link>
-        </Menu.Item> 
-        {activeTab ? 
-            <>
-                <Menu.Item>
-                    <Button type='primary' onClick={() => setActiveTab(0)}>Back</Button>
-                </Menu.Item>
-                {data.find((element: any) => element.key === activeTab)?.children.map((item: any) => (
-                    <Menu.Item key={item.key} icon={item.icon} >
-                        <Link to={item.path}>{item.name}</Link>
-                    </Menu.Item>
-                ))}
-            </>
-            : 
-            data.map((item: any) => (
-                <Menu.Item key={item.key} icon={item.icon} >
-                    <Link to={item.path} onClick={() => setActiveTab(item.key)}>{item.name}</Link>
-                </Menu.Item>
-            ))
-        }
-    </Menu>;
-
     return (
         <BrowserRouter>
             <Layout>
                 <Sider trigger={null} style={{ height: '100vh' }}>	
-                    {dataMenu}
+                    <Menu theme='dark' mode='inline'>
+                        <Menu.Item key='0' className='logo' icon={TrophyIcon()} >
+                            <Link to='/SportsOrganization'>Sport Organisation</Link>
+                        </Menu.Item> 
+                        {activeTab ? 
+                            <>
+                                <Menu.Item style={{borderBottom: '1px solid white', paddingBottom: '0.5rem'}}>
+                                    <Button type='primary' onClick={() => setActiveTab(0)}>Back</Button>
+                                </Menu.Item>
+                                {data.find((element: any) => element.key === activeTab)?.children.map((item: any) => (
+                                    <Menu.Item key={item.key} icon={item.icon} >
+                                        <Link to={item.path}>{item.name}</Link>
+                                    </Menu.Item>
+                                ))}
+                            </>
+                            : 
+                            data.map((item: any) => (
+                                <Menu.Item key={item.key} icon={item.icon} >
+                                    <Link to={item.path} onClick={() => setActiveTab(item.key)}>{item.name}</Link>
+                                </Menu.Item>
+                            ))
+                        }
+                    </Menu>;
                 </Sider>
                 <RoutesComponent />
             </Layout>

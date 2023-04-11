@@ -1,15 +1,36 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+
 import { Link } from 'react-router-dom';
 import { Layout , List, Avatar } from 'antd';
 
-import { tournamentData } from '../PagesData';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { RootState } from '../../../Store/store';
+
+import { getTournamentsDataAction } from '../../Actions/tournamentsAction';
 
 import 'antd/dist/antd.css';
 
 const { Header, Content } = Layout;
 
 const Tournaments = () => {
-    const data = tournamentData;
+    const tournamentsData = useSelector((state: RootState) => state.tournaments.tournaments);
+
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        getTournaments();
+    }, []);
+
+    const getTournaments = async() => {
+        dispatch(await getTournamentsDataAction());
+    };
+    
+    const data = tournamentsData.map((item: {tournamentName: string, id: string, description: string}) => ({
+        title: item.tournamentName,
+        description: item.description,
+        id: item.id,
+    }));
 
     return (
         <Layout className='site-layout'>
@@ -20,13 +41,13 @@ const Tournaments = () => {
                 <List
                     itemLayout='horizontal'
                     dataSource={data}
-                    renderItem={item => (
+                    renderItem={(item: {title: string, id: string, description: string}) => (
                         <List.Item>
-                            <Link to={`/Tournaments/${item.id}`} style={{ width: '100%', height: '100%' }}>
+                            <Link to={`/SportsOrganization/Tournaments/${item.title}`} style={{ width: '100%', height: '100%' }}>
                                 <List.Item.Meta
                                     avatar={<Avatar src='https://joeschmoe.io/api/v1/random' />}
                                     title={<span>{item.title}</span>}
-                                    description='Tournament description'
+                                    description={item.description}
                                 />
                             </Link>
                         </List.Item>
