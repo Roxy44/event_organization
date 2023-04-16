@@ -1,6 +1,6 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
-import { Table } from 'antd';
+import { Spin, Table } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 
 import { TableDataType } from '../../types';
@@ -15,16 +15,20 @@ import './TableComponent.css';
 import { Link } from 'react-router-dom';
 
 const TableComponent = (props: { tournamentName: string | undefined}) => {
+    const [isLoading, setLoading] = useState(true);
+
     const tournamentsData = useSelector((state: RootState) => state.tournaments.tournaments);
 
     const dispatch = useDispatch();
 
     useEffect(() => {
+        setLoading(true);
         getTournaments();
     }, []);
 
     const getTournaments = async() => {
         dispatch(await getTournamentsDataAction());
+        setLoading(false);
     };
     
     //add descr for every team
@@ -34,8 +38,9 @@ const TableComponent = (props: { tournamentName: string | undefined}) => {
         {
             dataIndex: 'name',
             key: 'name1',
+            render: (name) => (<Link to={`/SportsOrganization/Teams/${name}`}>{name}</Link>)
         },
-        ...oneTournamentData[0].results.map((item: any, index: number) => (
+        ...oneTournamentData[0]?.results?.map((item: any, index: number) => (
             {
                 title: item.name, 
                 dataIndex: 'statistic' + index, 
@@ -45,13 +50,10 @@ const TableComponent = (props: { tournamentName: string | undefined}) => {
     ];
 
     // пофиксить момент со statistic
-
-    // а также рендер на команду с игроками
     const data: any = oneTournamentData[0].results?.map((item: any, index: number) => (
         {
             key: 'row' + index,
             name: item.name,
-            render: (name: string) => <Link to={`/SportsOrganization/Teams/${item.name}`}>{name}</Link>,
             statistic0: item.score[0],
             statistic1: item.score[1],
             statistic2: item.score[2],
@@ -59,7 +61,10 @@ const TableComponent = (props: { tournamentName: string | undefined}) => {
     ));
 
     return (
-        <Table className='tournamentStatistic' columns={columns} dataSource={data} />
+        isLoading ? 
+            <Spin className='Loading' tip='Loading' size='large' />
+            :
+            <Table className='tournamentStatistic' columns={columns} dataSource={data} />  
     );
 };
 

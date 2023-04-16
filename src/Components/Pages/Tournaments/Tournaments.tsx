@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { Link } from 'react-router-dom';
-import { Layout , List, Avatar } from 'antd';
+import { Layout , List, Avatar, Spin } from 'antd';
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -14,19 +14,24 @@ import 'antd/dist/antd.css';
 const { Header, Content } = Layout;
 
 const Tournaments = () => {
+    const [isLoading, setLoading] = useState(true);
+
     const tournamentsData = useSelector((state: RootState) => state.tournaments.tournaments);
 
     const dispatch = useDispatch();
 
     useEffect(() => {
+        setLoading(true);
         getTournaments();
     }, []);
 
     const getTournaments = async() => {
         dispatch(await getTournamentsDataAction());
+        setLoading(false);
     };
     
-    const data = tournamentsData.map((item: {tournamentName: string, id: string, description: string}) => ({
+    
+    const data = tournamentsData?.map((item: {tournamentName: string, id: string, description: string}) => ({
         title: item.tournamentName,
         description: item.description,
         id: item.id,
@@ -37,23 +42,29 @@ const Tournaments = () => {
             <Header className='site-layout-background pageHeader'>
                 <span className='headerTitle'>Tournaments list</span>
             </Header>
-            <Content className='site-layout-background' style={{padding: 24 }}>
-                <List
-                    itemLayout='horizontal'
-                    dataSource={data}
-                    renderItem={(item: {title: string, id: string, description: string}) => (
-                        <List.Item>
-                            <Link to={`/SportsOrganization/Tournaments/${item.title}`} style={{ width: '100%', height: '100%' }}>
-                                <List.Item.Meta
-                                    avatar={<Avatar src='https://joeschmoe.io/api/v1/random' />}
-                                    title={<span>{item.title}</span>}
-                                    description={item.description}
-                                />
-                            </Link>
-                        </List.Item>
-                    )}
-                />
-            </Content>
+            {isLoading ?
+                <Spin className='Loading' tip='Loading' size='large' />
+                :
+                (
+                    <Content className='site-layout-background' style={{padding: 24 }}>
+                        <List
+                            itemLayout='horizontal'
+                            dataSource={data}
+                            renderItem={(item: {title: string, id: string, description: string}) => (
+                                <List.Item>
+                                    <Link to={`/SportsOrganization/Tournaments/${item.title}`} style={{ width: '100%', height: '100%' }}>
+                                        <List.Item.Meta
+                                            avatar={<Avatar src='https://api.thecatapi.com/v1/images/search' />}
+                                            title={<span>{item.title}</span>}
+                                            description={item.description}
+                                        />
+                                    </Link>
+                                </List.Item>
+                            )}
+                        />
+                    </Content>
+                )
+            }
         </Layout>
     );
 };
