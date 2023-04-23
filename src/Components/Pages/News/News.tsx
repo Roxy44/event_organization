@@ -96,7 +96,7 @@ const News = () => {
     return (
         <Layout className='site-layout'>
             <Header className='site-layout-background pageHeader'>
-                <span className='headerTitle'>News</span>
+                <span className='headerTitle'>Новости</span>
             </Header>
             <Content className='site-layout-background news'>
                 <Table columns={columns} dataSource={data} />

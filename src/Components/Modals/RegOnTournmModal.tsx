@@ -13,7 +13,7 @@ const RegOnTournmModal = (props: any) => {
     };
 
     return (
-        <Modal title='Basic Modal' open={props.isModalOpen} onOk={handleOk} onCancel={handleCancel}>
+        <Modal title='Запись на турнир' open={props.isModalOpen} onOk={handleOk} onCancel={handleCancel}>
             <p>Some contents...</p>
             <p>Some contents...</p>
             <p>Some contents...</p>

@@ -40,7 +40,7 @@ const Tournaments = () => {
     return (
         <Layout className='site-layout'>
             <Header className='site-layout-background pageHeader'>
-                <span className='headerTitle'>Tournaments list</span>
+                <span className='headerTitle'>Список турниров</span>
             </Header>
             {isLoading ?
                 <Spin className='Loading' tip='Loading' size='large' />

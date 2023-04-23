@@ -1,40 +1,41 @@
 #components-layout-demo-custom-trigger .trigger {
-	padding: 0 24px;
-	font-size: 18px;
-	line-height: 64px;
-	cursor: pointer;
-	transition: color 0.3s;
+    padding: 0 24px;
+    font-size: 18px;
+    line-height: 64px;
+    cursor: pointer;
+    transition: color 0.3s;
 }
 
 #components-layout-demo-custom-trigger .trigger:hover {
-	color: #1890ff;
+    color: #1890ff;
 }
 
 .site-layout .site-layout-background {
-	background: #fff;
+    background: #fff;
 }
 
 .logo {
-	height: 4rem !important;
-	margin-top: 0 !important;
-	font-size: 1.1em;
-	color: black !important;
-	background-color: darkorange !important;
+    height: 4rem !important;
+    margin-top: 0 !important;
+    font-size: 1.1em;
+    color: black !important;
+    background-color: darkorange !important;
 }
 
 .logo:hover {
-	background-color: darkorange !important;
+    background-color: darkorange !important;
 }
 
 .Link {
-	color: black !important;
+    color: black !important;
 }
 
 .pageHeader {
-	background-color: lightgray !important;
-	padding: 0 24px !important;
+    background-color: lightgray !important;
+    padding: 0 24px !important;
+    border: 1px solid black;
 }
 
 .headerTitle {
-	font-weight: bold;
+    font-weight: bold;
 }

@@ -33,7 +33,7 @@ const App = () => {
                         {activeTab ? 
                             <>
                                 <Menu.Item style={{borderBottom: '1px solid white', paddingBottom: '0.5rem'}}>
-                                    <Button type='primary' onClick={() => setActiveTab(0)}>Back</Button>
+                                    <Button type='primary' onClick={() => setActiveTab(0)}>Назад</Button>
                                 </Menu.Item>
                                 {data.find((element: any) => element.key === activeTab)?.children.map((item: any) => (
                                     <Menu.Item key={item.key} icon={item.icon} >

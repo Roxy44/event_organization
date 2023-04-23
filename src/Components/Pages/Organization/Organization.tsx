@@ -1,26 +1,28 @@
 import React, { useEffect, useState } from 'react';
 
-import { Button, Layout, Spin } from 'antd';
+import { Button, Input, Layout, List, Modal, Spin } from 'antd';
+
+import { Link } from 'react-router-dom';
 
 import { useDispatch, useSelector } from 'react-redux';
-
 import { RootState } from '../../../Store/store';
 
-import { getScoreDataAction, changeScoreDataAction } from '../../Actions/organizationActions';
+import { getScoreDataAction } from '../../Actions/organizationActions';
 
 import './Organization.css';
 
-const { Header, Content } = Layout;
+const { Header, Content, Footer } = Layout;
 
 const Organisation = () => {
-    const [isLoading, setLoading] = useState(true);
-
-    const matchData = useSelector((state: RootState) => state.organization.scoreData);
     const dispatch = useDispatch();
+
+    const [isLoading, setLoading] = useState(true);
+    const [isModalOpen, setIsModalOpen] = useState(false);
     
-    const firstTeamName = matchData.name?.split(' ')[0];
-    const secondTeamName = matchData.name?.split(' ')[2];
+    const matchData = useSelector((state: RootState) => state.organization.scoreData);
     
+    const data: any[] = [matchData];
+
     useEffect(() => {
         setLoading(true);
         getScore();
@@ -31,48 +33,52 @@ const Organisation = () => {
         setLoading(false);
     };
     
-    const changeScore = async (data: {action: number, team: string}) => {
-        dispatch(await changeScoreDataAction(data.team, data.action, matchData));
+    const handleOk = () => {
+        setIsModalOpen(false);
+    };
+    
+    const handleCancel = () => {
+        setIsModalOpen(false);
     };
 
-    return (
+    return ( 
         <Layout className='site-layout'>
+            <Modal title='Организовать турнир' open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
+                <Input placeholder='поле 1'></Input>
+                <Input placeholder='поле 2'></Input>
+                <Input placeholder='поле 3'></Input>
+                <Input placeholder='поле 4'></Input>
+                <Input placeholder='поле 5'></Input>
+            </Modal>
             <Header className='site-layout-background pageHeader'>
-                <span className='headerTitle'>{`Match: ${matchData.name}`}</span>
+                <span className='headerTitle'>Организация спортивной деятельности</span>
             </Header>
             {isLoading ?
                 <Spin className='Loading' tip='Loading' size='large' />
                 :
                 (
-                    <Content className='site-layout-background organizationContent' style={{padding: 24 }}>
-                        <div className='Results'>
-                            <div className='matchName'>
-                                <span>{firstTeamName}</span>
-                                <span>VS</span>
-                                <span>{secondTeamName}</span>
-                            </div>
-                            <div className='matchResults'>
-                                <div className='FirstTeamScore'>           
-                                    <span className='ScorePanel'>{matchData.firstCommand}</span>     
-                                    <div className='ScoreButtons'>
-                                        <Button onClick={() => changeScore({action: -1, team: 'firstCommand'})}>Sub</Button>
-                                        <Button onClick={() => changeScore({action: 1, team: 'firstCommand'})}>Add</Button>
-                                    </div>
-                                </div>
-                                <div className='divider'></div>
-                                <div className='SecondTeamScore'>
-                                    <span className='ScorePanel'>{matchData.secondCommand}</span>                    
-                                    <div className='ScoreButtons'>
-                                        <Button onClick={() => changeScore({action: -1, team: 'secondCommand'})}>Sub</Button>
-                                        <Button onClick={() => changeScore({action: 1, team: 'secondCommand'})}>Add</Button>
-                                    </div>
-                                </div>
-                            </div>  
-                        </div> 
+                    <Content className='site-layout-background' style={{padding: 24 }}>
+                        <List
+                            itemLayout='horizontal'
+                            dataSource={data}
+                            renderItem={(item: {name: string, tournamentName: string}) => (
+                                <List.Item>
+                                    <Link to={`/SportsOrganization/Organization/${item.name}`} style={{ width: '100%', height: '100%' }}>
+                                        <List.Item.Meta
+                                            title={<span>{item.name}</span>}
+                                            description={`the match of ${item.tournamentName}`}
+                                        />
+                                    </Link>
+                                </List.Item>
+                            )}
+                        />
                     </Content>
                 )
             }
-        </Layout> 
+            <Footer style={{border: '1px solid black'}}>
+                <Button type='primary' onClick={() => setIsModalOpen(true)}>Организовать матч</Button>
+            </Footer>
+        </Layout>
     );
 };
 

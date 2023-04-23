@@ -7,6 +7,7 @@ import Tournaments from '../Pages/Tournaments/Tournaments';
 import TournamentInfo from '../Pages/Tournaments/TournamentInfo';
 import Teams from '../Pages/Teams/Teams';
 import Organisation from '../Pages/Organization/Organization';
+import MatchComponent from '../Pages/Organization/MatchComponent';
 
 const RoutesComponent = () => {
     return (
@@ -18,6 +19,7 @@ const RoutesComponent = () => {
             <Route path='/SportsOrganization/Tournaments/:name' element={<TournamentInfo />} />
             <Route path='/SportsOrganization/Teams/:name' element={<Teams />} />
             <Route path='/SportsOrganization/Organization' element={<Organisation /> } />
+            <Route path='/SportsOrganization/Organization/:name' element={<MatchComponent />} />
         </Routes>
     );
 };

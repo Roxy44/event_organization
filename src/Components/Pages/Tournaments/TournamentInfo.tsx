@@ -41,7 +41,7 @@ const TournamentInfo = () => {
                 <div className='registrationTab'>
                     <Button type='primary' className='registration' disabled={!regestrationIsActive} onClick={showModal}>
                         <EditOutlined />
-                    Register On Tournament
+                    Записаться на турнир
                     </Button>
                     <Timer endOfRegestration={() => endOfRegestration()} />
                 </div>
