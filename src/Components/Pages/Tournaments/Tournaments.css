@@ -1,5 +1,25 @@
 .registrationTab {
     display: flex;
+    align-items: center;
+}
+
+.pageHeader {
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.headerTitle {
+    margin-right: 0.5rem;
+}
+
+.changeTitle {
+    width: 100%;
+    display: flex;
+}
+
+.changeTitle> :nth-child(1) {
+    margin-right: 0.5rem;
 }
 
 .timer {
@@ -8,4 +28,8 @@
     margin-left: 0.5rem;
     padding: 4px;
     font-weight: bold;
+}
+
+.competitorList {
+    margin-top: 0.5rem;
 }

@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 
 import { changeScoreDataAction } from '../../Actions/organizationActions';
-import { RootState } from '../../../Store/store';
+import { RootState } from '../../types';
 
 const { Header, Content } = Layout;
 
@@ -52,7 +52,7 @@ const MatchComponent = () => {
                         </div>
                     </div>  
                 </div> 
-            </Content><div>MatchComponent</div>
+            </Content>
         </Layout>
     );
 };

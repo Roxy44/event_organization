@@ -1,0 +1,9 @@
+.resultsContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.resultsList {
+    width: 70%;
+}

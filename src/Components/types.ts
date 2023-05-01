@@ -1,3 +1,5 @@
+import { store } from '../Store/store';
+
 export type RoutesTypes = {
 	key: number;
     name: string;
@@ -8,8 +10,9 @@ export type RoutesTypes = {
         name: string;
         path: string;
         icon: JSX.Element;
+        available: string[];
     }[];
-}[]
+}[];
 
 export interface DataType {
     key: string;
@@ -27,3 +30,5 @@ export interface TableDataType {
     statistic3: Number | null;
     statistic4: Number | null;
 }
+
+export type RootState = ReturnType<typeof store.getState>;

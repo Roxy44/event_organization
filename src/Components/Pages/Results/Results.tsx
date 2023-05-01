@@ -1,25 +1,31 @@
 import React, { useEffect, useState } from 'react';
 
 import { Link } from 'react-router-dom';
-import { Layout , List, Avatar, Spin } from 'antd';
+
+import { Avatar, Layout, List, Spin } from 'antd';
 
 import { useDispatch, useSelector } from 'react-redux';
-
 import { RootState } from '../../types';
 
 import { getTournamentsDataAction } from '../../Actions/tournamentsAction';
 
-import 'antd/dist/antd.css';
+import './Results.css';
 
 const { Header, Content } = Layout;
 
-const Tournaments = () => {
+const Results = () => {
+    const dispatch = useDispatch();
+
     const [isLoading, setLoading] = useState(true);
 
     const tournamentsData = useSelector((state: RootState) => state.tournaments.tournaments);
-
-    const dispatch = useDispatch();
-
+    
+    const data = tournamentsData?.map((item: {tournamentName: string, id: string, description: string}) => ({
+        title: item.tournamentName,
+        description: item.description,
+        id: item.id,
+    }));
+    
     useEffect(() => {
         setLoading(true);
         getTournaments();
@@ -29,17 +35,11 @@ const Tournaments = () => {
         dispatch(await getTournamentsDataAction());
         setLoading(false);
     };
-    
-    const data = tournamentsData?.map((item: {tournamentName: string, id: string, description: string}) => ({
-        title: item.tournamentName,
-        description: item.description,
-        id: item.id,
-    }));
 
     return (
-        <Layout className='site-layout'>
+        <Layout className='site-layout'> 
             <Header className='site-layout-background pageHeader'>
-                <span className='headerTitle'>Список турниров</span>
+                <span className='headerTitle'>Результаты</span>    
             </Header>
             {isLoading ?
                 <Spin className='Loading' tip='Loading' size='large' />
@@ -51,7 +51,7 @@ const Tournaments = () => {
                             dataSource={data}
                             renderItem={(item: {title: string, id: string, description: string}) => (
                                 <List.Item>
-                                    <Link to={`/SportsOrganization/Tournaments/${item.title}`} style={{ width: '100%', height: '100%' }}>
+                                    <Link to={`/SportsOrganization/Results/${item.title}`} style={{ width: '100%', height: '100%' }}>
                                         <List.Item.Meta
                                             avatar={<Avatar src='https://api.thecatapi.com/v1/images/search' />}
                                             title={<span>{item.title}</span>}
@@ -68,4 +68,4 @@ const Tournaments = () => {
     );
 };
 
-export default Tournaments;
+export default Results;

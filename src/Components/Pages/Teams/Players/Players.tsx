@@ -3,7 +3,7 @@ import { List, Button, Avatar, Spin } from 'antd';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import { RootState } from '../../../../Store/store';
+import { RootState } from '../../../types';
 
 import { getTeamsDataAction } from '../../../Actions/teamsActions';
 

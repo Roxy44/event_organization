@@ -1,15 +1,43 @@
 import React from 'react';
 
-import { Layout, Form, Button, Input, Checkbox } from 'antd';
+import { useNavigate } from 'react-router-dom';
+
+import { Layout, Form, Button, Input } from 'antd';
+
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../types';
+
 import 'antd/dist/antd.css';
 
 import './Authorization.css';
 
+
 const { Header, Content } = Layout;
 
 const Authorization = () => {
+    const navigate = useNavigate();
+
+    const dispatch = useDispatch();
+
+    const { usersAccauntData } = useSelector((state: RootState) => state.authorization);
+
     const onFinish = (values: any) => {
-        //console.log('Success:', values);
+        let auth = false;
+        let role = 'user';
+        usersAccauntData.forEach((item: {login: string, password: string, role: string}) => {
+            if (item.login === values.username && item.password === values.password) { 
+                auth = true;
+                role = item.role;
+            }
+        });
+
+        if (auth) {
+            dispatch({ type: 'SET_AUTHORIZATION_STATUS', payload: true });
+            dispatch({ type: 'SET_USER_ROLE', payload: role });
+            navigate('/SportsOrganization/News');
+        } else {
+            alert('Неправильный логин или пароль');
+        }
     };
     
     const onFinishFailed = (errorInfo: any) => {
@@ -45,9 +73,6 @@ const Authorization = () => {
                         rules={[{ required: true, message: 'Please input your password!' }]}
                     >
                         <Input.Password />
-                    </Form.Item>
-                    <Form.Item name='remember' valuePropName='checked' wrapperCol={{ offset: 8, span: 16 }}>
-                        <Checkbox>Remember me</Checkbox>
                     </Form.Item>
                     <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
                         <Button type='primary' htmlType='submit'>

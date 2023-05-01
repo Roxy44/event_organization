@@ -1,10 +1,9 @@
 import { useEffect, useState } from 'react';
 
-import { Spin, Table } from 'antd';
+import { List, Spin, Table } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 
-import { TableDataType } from '../../types';
-import { RootState } from '../../../Store/store';
+import { TableDataType, RootState } from '../../types';
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -30,7 +29,7 @@ const TableComponent = (props: { tournamentName: string | undefined}) => {
         dispatch(await getTournamentsDataAction());
         setLoading(false);
     };
-    
+
     //add descr for every team
     const oneTournamentData = tournamentsData.filter((item: {tournamentName: string}) => item.tournamentName === props.tournamentName);
 
@@ -60,11 +59,39 @@ const TableComponent = (props: { tournamentName: string | undefined}) => {
         }
     ));
 
+    const dataSource: any = [
+        {
+            id: 0,
+            firstTeam: 'FSU',
+            secondTeam: 'RTF',
+        },
+        {
+            id: 1,
+            firstTeam: 'FSU',
+            secondTeam: 'KaRoZah',
+        },
+        {
+            id: 2,
+            firstTeam: 'RTF',
+            secondTeam: 'KaRoZah',
+        }
+    ];
+
     return (
         isLoading ? 
             <Spin className='Loading' tip='Loading' size='large' />
             :
-            <Table className='tournamentStatistic' columns={columns} dataSource={data} />  
+            <div>
+                <Table className='tournamentStatistic' columns={columns} dataSource={data} pagination={false} />
+                <List
+                    className='tournamentsMatches'
+                    header={<div>30.04.23</div>}
+                    bordered
+                    dataSource={dataSource}
+                    renderItem={(item: any) => <List.Item>{`${item.firstTeam} - ${item.secondTeam}`}</List.Item>}
+                />
+            </div>
+            
     );
 };
 
