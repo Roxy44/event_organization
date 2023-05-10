@@ -1,24 +1,30 @@
 import React, { useEffect, useState } from 'react';
 
 import { Link } from 'react-router-dom';
-import { Layout , List, Avatar, Spin } from 'antd';
 
-import { useDispatch, useSelector } from 'react-redux';
+import { Button, Layout , Spin, Table } from 'antd';
+import { ColumnsType } from 'antd/lib/table';
 
-import { RootState } from '../../types';
+import { useSelector } from 'react-redux';
 
-import { getTournamentsDataAction } from '../../Actions/tournamentsAction';
+import { RootState, TournamentsDataType } from '../../types';
+
+//import { getTournamentsDataAction } from '../../Actions/tournamentsAction';
 
 import 'antd/dist/antd.css';
 
 const { Header, Content } = Layout;
 
 const Tournaments = () => {
+    const { userRole } = useSelector((state: RootState) => state.authorization);
+    
+    const organizatorRole = ['admin', 'organizator'];
+
     const [isLoading, setLoading] = useState(true);
 
-    const tournamentsData = useSelector((state: RootState) => state.tournaments.tournaments);
+    //const dispatch = useDispatch();
 
-    const dispatch = useDispatch();
+    const { tournamentsData } = useSelector((state: RootState) => state.tournaments);
 
     useEffect(() => {
         setLoading(true);
@@ -26,16 +32,41 @@ const Tournaments = () => {
     }, []);
 
     const getTournaments = async() => {
-        dispatch(await getTournamentsDataAction());
+        //dispatch(await getTournamentsDataAction());
         setLoading(false);
     };
-    
-    const data = tournamentsData?.map((item: {tournamentName: string, id: string, description: string}) => ({
-        title: item.tournamentName,
-        description: item.description,
-        id: item.id,
+
+    const data = tournamentsData?.map((item: {name: string, main: string, period: any}) => ({
+        name: item.name,
+        main: item.main,
+        period: item.period,
+        notify: <></>,
     }));
 
+    const columns: ColumnsType<TournamentsDataType> = [
+        {
+            title: 'Наименование',
+            dataIndex: 'name',
+            key: 'name',
+            render: (name) => <Link to={`/event_organization/tournaments/${name}`} style={{ width: '100%', height: '100%' }}>{name}</Link>
+        },
+        {
+            title: 'Ответственный',
+            dataIndex: 'main',
+            key: 'main',
+        },
+        {
+            title: 'Сроки проведения',
+            dataIndex: 'period',
+            key: 'period',
+        },
+        {
+            dataIndex: 'notify',
+            key: 'notify',
+            render: () => <Button type='primary' style={!organizatorRole.includes(userRole) ? {display: 'none'} : {}}>Уведомить</Button>
+        },
+    ];
+    
     return (
         <Layout className='site-layout'>
             <Header className='site-layout-background pageHeader'>
@@ -46,21 +77,7 @@ const Tournaments = () => {
                 :
                 (
                     <Content className='site-layout-background' style={{padding: 24 }}>
-                        <List
-                            itemLayout='horizontal'
-                            dataSource={data}
-                            renderItem={(item: {title: string, id: string, description: string}) => (
-                                <List.Item>
-                                    <Link to={`/SportsOrganization/Tournaments/${item.title}`} style={{ width: '100%', height: '100%' }}>
-                                        <List.Item.Meta
-                                            avatar={<Avatar src='https://api.thecatapi.com/v1/images/search' />}
-                                            title={<span>{item.title}</span>}
-                                            description={item.description}
-                                        />
-                                    </Link>
-                                </List.Item>
-                            )}
-                        />
+                        <Table className='tournamentStatistic' columns={columns} dataSource={data} pagination={false} />
                     </Content>
                 )
             }

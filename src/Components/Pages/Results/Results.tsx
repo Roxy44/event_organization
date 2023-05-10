@@ -1,69 +1,99 @@
 import React, { useEffect, useState } from 'react';
 
-import { Link } from 'react-router-dom';
+import { Layout, Spin, Table } from 'antd';
+import { ColumnsType } from 'antd/lib/table';
 
-import { Avatar, Layout, List, Spin } from 'antd';
+import { useSelector } from 'react-redux';
+import { RootState, ResultsDataType } from '../../types';
 
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../types';
-
-import { getTournamentsDataAction } from '../../Actions/tournamentsAction';
+//import { getTournamentsDataAction } from '../../Actions/tournamentsAction';
 
 import './Results.css';
+
 
 const { Header, Content } = Layout;
 
 const Results = () => {
-    const dispatch = useDispatch();
+    //const dispatch = useDispatch();
 
     const [isLoading, setLoading] = useState(true);
 
-    const tournamentsData = useSelector((state: RootState) => state.tournaments.tournaments);
+    const { tournamentsData } = useSelector((state: RootState) => state.tournaments);
+    const { universitiesData } = useSelector((state: RootState) => state.universities);
     
-    const data = tournamentsData?.map((item: {tournamentName: string, id: string, description: string}) => ({
-        title: item.tournamentName,
-        description: item.description,
-        id: item.id,
-    }));
-    
+
     useEffect(() => {
         setLoading(true);
         getTournaments();
     }, []);
 
     const getTournaments = async() => {
-        dispatch(await getTournamentsDataAction());
+        //dispatch(await getTournamentsDataAction());
         setLoading(false);
     };
 
-    return (
-        <Layout className='site-layout'> 
-            <Header className='site-layout-background pageHeader'>
-                <span className='headerTitle'>Результаты</span>    
-            </Header>
-            {isLoading ?
-                <Spin className='Loading' tip='Loading' size='large' />
-                :
-                (
-                    <Content className='site-layout-background' style={{padding: 24 }}>
-                        <List
-                            itemLayout='horizontal'
-                            dataSource={data}
-                            renderItem={(item: {title: string, id: string, description: string}) => (
-                                <List.Item>
-                                    <Link to={`/SportsOrganization/Results/${item.title}`} style={{ width: '100%', height: '100%' }}>
-                                        <List.Item.Meta
-                                            avatar={<Avatar src='https://api.thecatapi.com/v1/images/search' />}
-                                            title={<span>{item.title}</span>}
-                                            description={item.description}
-                                        />
-                                    </Link>
-                                </List.Item>
-                            )}
-                        />
-                    </Content>
-                )
+    const columnsTable: ColumnsType<ResultsDataType> = [
+        {
+            title: 'Университет \\ Вид',
+            dataIndex: 'name',
+            key: 'name',
+        },  
+        ...tournamentsData.map((item: any, index: number) => (
+            {
+                title: item.name, 
+                dataIndex: 'sport' + index, 
+                key: item.name + index,
             }
+        )), 
+        {
+            title: 'Очки',
+            dataIndex: 'score',
+            key: 'score',
+        },
+        {
+            title: 'Результаты',
+            dataIndex: 'result',
+            key: 'result',
+        }, 
+    ];
+
+    const score = tournamentsData.map((item: any) => (
+        item.results.map((score: any) => (
+            score.scores.reduce((acc: any, curr: any) => acc + curr.winScore, 0)
+        ))
+    ));
+
+    const tableData: any = universitiesData.map((university: any, uniIndex: number) => { 
+        
+        const newItem: any = {
+            key: 'row1' + uniIndex,
+            name: university.name,
+            result: '1',
+        };
+
+        tournamentsData.forEach((item: any, itemIndex: number) => {
+            newItem['sport' + itemIndex] = item.results[uniIndex].scores.reduce((acc: any, curr: any) => acc + curr.winScore, 0);
+            newItem['score'] = score[itemIndex][uniIndex];
+        });
+
+        return newItem;
+    });
+    
+  
+    return (
+        <Layout className='site-layout'>
+            <Header className='site-layout-background pageHeader'>
+                <span className='headerTitle'>Результаты</span>
+            </Header>
+            <Content className='resultsContainer'>
+                {isLoading ? <Spin className='Loading' tip='Loading' size='large' />
+                    : <Table
+                        className='resultsList' 
+                        columns={columnsTable}
+                        dataSource={tableData}
+                        pagination={false}
+                    />}
+            </Content>
         </Layout>
     );
 };

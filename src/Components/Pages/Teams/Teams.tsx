@@ -13,7 +13,7 @@ const Teams = () => {
     return (
         <Layout className='site-layout'>
             <Header className='site-layout-background pageHeader'>
-                <span className='headerTitle'>Team {name} roster: </span>
+                <span className='headerTitle'>Команда: {name}</span>
             </Header>
             <Content className='site-layout-background' style={{padding: 24 }}>
                 <Players teamName={name} />

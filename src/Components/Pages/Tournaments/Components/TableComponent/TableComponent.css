@@ -3,11 +3,16 @@
     border: 1px solid black;
 }
 
-.tournamentsMatches {
-    width: 10%;
+.matchesButton {
+    margin-top: 1rem;
+}
+
+
+.matchStatistic {
     display: flex;
     flex-direction: column;
-    margin-top: 2rem;
+    margin-top: 1rem;
+    border: 1px solid black;
 }
 
 .tournamentsMatches>.ant-list-header {

@@ -6,6 +6,7 @@ import {
     DribbbleOutlined,
     SearchOutlined,
     PlusSquareOutlined,
+    ReadOutlined,
 } from '@ant-design/icons';
 
 export function CommentIcon() {
@@ -26,8 +27,10 @@ export function DribbbleIcon() {
 export function SearchIcon() {
     return <SearchOutlined />;
 }
-
 export function PlusSquareIcon() {
     return <PlusSquareOutlined />;
+}
+export function ReadOutlinedIcon() {
+    return <ReadOutlined />;
 }
 

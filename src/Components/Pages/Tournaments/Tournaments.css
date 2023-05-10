@@ -1,6 +1,11 @@
 .registrationTab {
     display: flex;
     align-items: center;
+    justify-content: space-between;
+}
+
+.registrationTab> :nth-child(1) {
+    display: flex;
 }
 
 .pageHeader {

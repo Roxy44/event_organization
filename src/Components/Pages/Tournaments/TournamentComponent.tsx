@@ -10,13 +10,13 @@ import { Layout, Button, Switch, Input } from 'antd';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../types';
 
-import TableComponent from '../../CustomComponents/TableComponent/TableComponent';
-import TournamentCompetitorsList from '../../CustomComponents/TournamentCompetitorsList/TournamentCompetitorsList';
-import Timer from '../../CustomComponents/TournamentTimer/TournamentTimer';
+import TableComponent from './Components/TableComponent/TableComponent';
+import TournamentCompetitorsList from './Components/TournamentCompetitorsList/TournamentCompetitorsList';
+import Timer from './Components/TournamentTimer/TournamentTimer';
 
 import { changeTournamentName } from '../../Actions/tournamentsAction';
 
-import RegOnTournmModal from '../../Modals/RegOnTournmModal';
+import RegOnTournmModal from './Modals/RegOnTournmModal';
 
 import 'antd/dist/antd.css';
 import './Tournaments.css';
@@ -25,7 +25,7 @@ const { Header, Content } = Layout;
 
 const TournamentComponent = () => {
     const { userRole } = useSelector((state: RootState) => state.authorization);
-
+    
     const { name } = useParams();
 
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -41,7 +41,6 @@ const TournamentComponent = () => {
     
     const onOk = () => {
         changeTournamentName(title, name);
-        
         setIsInputOpen(false);
     };  
 
@@ -59,7 +58,7 @@ const TournamentComponent = () => {
 
     return (
         <Layout className='site-layout'>
-            <RegOnTournmModal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
+            <RegOnTournmModal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} name={name} />
             <Header className='site-layout-background pageHeader'>
                 <div>
                     {isInputOpen ? 
@@ -70,20 +69,25 @@ const TournamentComponent = () => {
                         : 
                         <div>
                             <span className='headerTitle'>{title}</span>
-                            <EditOutlined onClick={() => setIsInputOpen(true)} />
+                            <EditOutlined onClick={() => setIsInputOpen(true)} style={!competitorRole.includes(userRole) ? {display: 'none'} : {}} />
                         </div>
                     }
                 </div>
             </Header>
             <Content className='site-layout-background' style={{padding: 24 }}>
                 <div className='registrationTab'>
-                    <Button type='primary' className='registration' disabled={!isRegestrationActive || !competitorRole.includes(userRole)} onClick={showModal}>
-                        Записаться на турнир
-                    </Button>
-                    <Timer endOfRegestration={() => endOfRegestration()} />
+                    <div >
+                        <Button 
+                            type='primary' 
+                            className='registration'  
+                            style={!isRegestrationActive || !competitorRole.includes(userRole) ? {display: 'none'} : {display: 'block'}} onClick={showModal}>
+                        Подтвердить регистрацию турнира
+                        </Button>
+                        <Timer endOfRegestration={() => endOfRegestration()} selectedTournament={name} />
+                    </div>
                     <Switch onChange={onChange} />
                 </div>
-                {isRegestrationActive ? <TournamentCompetitorsList/> : <TableComponent tournamentName={name} />}
+                {isRegestrationActive ? <TournamentCompetitorsList selectedTournament={name} /> : <TableComponent tournamentName={name} />}
                 
             </Content>
         </Layout>

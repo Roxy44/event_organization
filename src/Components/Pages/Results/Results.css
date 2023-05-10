@@ -1,9 +1,18 @@
 .resultsContainer {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
+    margin-top: 4rem;
+}
+
+.tournamentOwner {
+    width: 70%;
+    display: flex;
+    margin-bottom: 8px;
+    font-weight: bold;
 }
 
 .resultsList {
     width: 70%;
+    border: 1px solid black;
 }

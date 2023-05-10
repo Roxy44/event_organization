@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { List, Button, Avatar, Spin } from 'antd';
+import { List, Button, Spin } from 'antd';
 
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import { RootState } from '../../../types';
 
-import { getTeamsDataAction } from '../../../Actions/teamsActions';
+//import { getTeamsDataAction } from '../../../Actions/teamsActions';
 
 import 'antd/dist/antd.css';
 import './Players.css';
@@ -14,8 +14,8 @@ import './Players.css';
 const Players = (props: {teamName: string | undefined}) => {
     const [isLoading, setLoading] = useState(true);
 
-    const teamData = useSelector((state: RootState) => state.teams.teams).filter((item: any) => item.teamName === props.teamName);
-    const dispatch = useDispatch();
+    const teamData = useSelector((state: RootState) => state.teams.teamsData).filter((item: any) => item.name === props.teamName);
+    //const dispatch = useDispatch();
 
     useEffect(() => {
         setLoading(true);
@@ -23,17 +23,17 @@ const Players = (props: {teamName: string | undefined}) => {
     }, []);
 
     const getTeams = async() => {
-        dispatch(await getTeamsDataAction());
+        //dispatch(await getTeamsDataAction());
         setLoading(false);
     };
 
     const data = teamData[0]?.players.map((player: any) => ({
-        title: player.surname + ' ' + player.name,
-        id: player.id, 
+        // title: player.surname + ' ' + player.name,
+        // id: player.id, 
     }));
     
     const openPlayerStatistic = () => {
-        //console.log('click');
+        
     };
 
     return ( 
@@ -43,15 +43,14 @@ const Players = (props: {teamName: string | undefined}) => {
             <List
                 itemLayout='horizontal'
                 dataSource={data}
-                renderItem={(item: {title: string}) => (
+                renderItem={(item: {name: string}) => (
                     <List.Item>
                         <Button 
                             className='playerButton' 
                             onClick={openPlayerStatistic}
                         >
                             <List.Item.Meta
-                                avatar={<Avatar src='https://joeschmoe.io/api/v1/random' />}
-                                title={<span>{item.title}</span>}
+                                title={<span>{item.name}</span>}
                             />
                         </Button>
                     </List.Item>

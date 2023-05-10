@@ -34,14 +34,10 @@ const Authorization = () => {
         if (auth) {
             dispatch({ type: 'SET_AUTHORIZATION_STATUS', payload: true });
             dispatch({ type: 'SET_USER_ROLE', payload: role });
-            navigate('/SportsOrganization/News');
+            navigate('/event_organization/news');
         } else {
             alert('Неправильный логин или пароль');
         }
-    };
-    
-    const onFinishFailed = (errorInfo: any) => {
-        //console.log('Failed:', errorInfo);
     };
     
     return (

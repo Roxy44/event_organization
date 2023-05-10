@@ -1,71 +1,91 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
-import { Button, Layout, List, Spin } from 'antd';
+import { Layout, Form, Button, DatePicker, Input, Select, Switch } from 'antd';
 
-import { Link } from 'react-router-dom';
-
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../types';
 
-import { getScoreDataAction } from '../../Actions/organizationActions';
+import { changeTournamentsData } from '../../Actions/tournamentsAction';
 
 import './Organization.css';
-import OrganizeTournm from './Modals/OrganizeTournm';
 
 const { Header, Content } = Layout;
 
+const { RangePicker } = DatePicker;
+
 const Organisation = () => {
+    const [ form ] = Form.useForm();
+
     const dispatch = useDispatch();
 
-    const [isLoading, setLoading] = useState(true);
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    
-    const matchData = useSelector((state: RootState) => state.organization.scoreData);
-    
-    const data: any[] = [matchData];
+    const { universitiesData } = useSelector((state: RootState) => state.universities);
+    const { tournamentsData } = useSelector((state: RootState) => state.tournaments);
 
-    useEffect(() => {
-        setLoading(true);
-        getScore();
-    }, []);
-    
-    const getScore = async() => {
-        dispatch(await getScoreDataAction());
-        setLoading(false);
+    const organizeTournament = () => {
+        form.validateFields()
+            .then(async values => dispatch(await changeTournamentsData(tournamentsData, values)))
+            .then(() => form.setFieldsValue({
+                sportType: true,
+                tournamentName: '',
+                format: [],
+                period: '',
+                main: [],
+                competitors: [],
+                prize_pool: '',
+            }));
     };
     
     return ( 
         <Layout className='site-layout'>
-            <OrganizeTournm isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
             <Header className='site-layout-background pageHeader'>
-                <span className='headerTitle'>Организация спортивной деятельности</span>
-            </Header>
-            <div className='organizationButton'>
-                <Button type='primary' onClick={() => setIsModalOpen(true)}>Организовать мероприятие</Button>
-            </div>
-            {isLoading ?
-                <Spin className='Loading' tip='Loading' size='large' />
-                :
-                (
-                    <Content className='site-layout-background' style={{padding: 24 }}>
-                        <span><b>Список матчей</b></span>
-                        <List
-                            itemLayout='horizontal'
-                            dataSource={data}
-                            renderItem={(item: {name: string, tournamentName: string}) => (
-                                <List.Item>
-                                    <Link to={`/SportsOrganization/Organization/${item.name}`} style={{ width: '100%', height: '100%' }}>
-                                        <List.Item.Meta
-                                            title={<span>{item.name}</span>}
-                                            description={`the match of ${item.tournamentName}`}
-                                        />
-                                    </Link>
-                                </List.Item>
-                            )}
+                <span className='headerTitle'>Организовать турнир</span>
+            </Header>           
+            <Content className='content'>
+                <Form 
+                    className='form'
+                    form={form}
+                    autoComplete='off'
+                >
+                    <Form.Item label='Вид соревнования' name='sportType' initialValue={true}>
+                        <Switch checkedChildren='Муж' unCheckedChildren='Жен' defaultChecked />
+                    </Form.Item>
+                    <Form.Item label='Название турнира' name='tournamentName' rules={[{ required: true, message: '' }]}>
+                        <Input placeholder='Введите название турнира' />
+                    </Form.Item>
+                    <Form.Item label='Формат проведения' name='format' rules={[{ required: true, message: '' }]}>
+                        <Select 
+                            placeholder='Выберите формат проведения' 
+                            options={[
+                                {value: 'Студенты'},
+                                {value: 'Профессора'},
+                                {value: 'Свободный'},
+                            ]}
                         />
-                    </Content>
-                )
-            }
+                    </Form.Item>
+                    <Form.Item label='Время проведения' name='period' rules={[{ required: true, message: '' }]}>
+                        <RangePicker format='DD.MM.YYYY'/>
+                    </Form.Item>
+                    <Form.Item label='Ответственный за организацию' name='main' rules={[{ required: true, message: '' }]}>
+                        <Select 
+                            placeholder='Выберите ответственного за организацию турнира' 
+                            options={[...universitiesData].map((item: { name: string }) => ({ value: item.name }))}
+                        />
+                    </Form.Item>
+                    <Form.Item label='Участники турнира' name='competitors' rules={[{ required: true, message: '' }]}>
+                        <Select 
+                            mode='multiple'
+                            placeholder='Выберите участников турнира' 
+                            options={[...universitiesData].map((item: { name: string }) => ({ value: item.name }))}
+                        />
+                    </Form.Item>
+                    <Form.Item label='Призовой фонд' name='prize_pool' rules={[{ required: true, message: '' }]}>
+                        <Input placeholder='Введите призовой фонд турнира в руб.' />
+                    </Form.Item>
+                </Form>
+                <div className='footer'>
+                    <Button type='primary' onClick={() => organizeTournament()}>Организовать</Button>
+                </div>
+            </Content>  
         </Layout>
     );
 };

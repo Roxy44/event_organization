@@ -1,17 +1,11 @@
 import { store } from '../Store/store';
 
 export type RoutesTypes = {
-	key: number;
+    key: number;
     name: string;
     path: string;
     icon: JSX.Element;
-    children: {
-        key: number;
-        name: string;
-        path: string;
-        icon: JSX.Element;
-        available: string[];
-    }[];
+    available: string[];
 }[];
 
 export interface DataType {
@@ -22,13 +16,40 @@ export interface DataType {
     columnFour: Object;
 }
 
-export interface TableDataType {
-    key: string;
+export interface UniversitiesDataType {
+    key: number;
     name: string;
-    statistic1: Number | null;
-    statistic2: Number | null;
-    statistic3: Number | null;
-    statistic4: Number | null;
+    main: string;
+    email: string;
 }
+
+export interface TournamentsDataType {
+    name: string;
+    main: string;
+    period: string;
+}
+
+export interface TournamentDataType {
+    id: number;
+    name: string;
+    status: string;
+}
+
+export interface TournamentTableDataType {
+    name: string;
+}
+
+export interface TournamentMatchesDataType {
+    date: string;
+    teams: string;
+    result: string;
+}
+
+export interface ResultsDataType {
+    date: string;
+    teams: string;
+    result: string;
+}
+
 
 export type RootState = ReturnType<typeof store.getState>;

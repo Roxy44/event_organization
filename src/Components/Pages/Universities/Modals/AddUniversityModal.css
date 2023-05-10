@@ -1,0 +1,17 @@
+.ant-modal-content {
+    width: 800px;
+}
+
+.teamPlayers .ant-form-item-label>label {
+    float: left;
+}
+
+.teamPlayers .ant-row {
+    display: flex;
+    flex-direction: column;
+}
+
+.playerInfo {
+    display: flex;
+    justify-content: space-between;
+}

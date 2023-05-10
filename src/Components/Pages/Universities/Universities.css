@@ -1,0 +1,10 @@
+.link {
+    text-decoration: underline;
+    color: blue
+}
+
+.actions>* {
+    padding: 4px;
+    border: 1px solid black;
+    border-radius: 6px;
+}

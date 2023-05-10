@@ -1,6 +1,7 @@
 import { db } from '../../Config/firebase';
 import { getDocs, collection, updateDoc, doc } from 'firebase/firestore';
 
+import moment from 'moment';
 const tournamentsCollectionRef = collection(db, 'tournaments');
 
 export const getTournamentsDataAction = async () => {
@@ -15,7 +16,59 @@ export const getTournamentsDataAction = async () => {
 
     return {
         type: 'SET_TOURNAMENTS_DATA', 
-        payload: filteredData
+        payload: filteredData,
+    };
+};
+
+export const changeTournamentsData = async (data: any, values: any) => {
+    const newItem: any = { 
+        name: `${values.tournamentName} ${values.sportType ? '(М)' : '(Ж)'}`,
+        format: values.format,
+        period: `${moment(values.period[0]).format('MMM YYYY')} - ${moment(values.period[1]).format('MMM YYYY')}`,
+        main: values.main,
+        competitors: values.competitors.map((item: string) => ({
+            name: item,
+            status: 'Ожидание...',
+        })),
+        prize_pool: values.prize_pool,
+        tournament_place: '',
+        matchesData: [
+            {
+                date: '',
+                teams: '',
+                result: ''
+            },
+        ]
+    };
+
+    newItem['results'] = values.competitors.map((item: string) => (
+        {
+            name: item,
+            scores: [],
+        }
+    ));
+    
+    return {
+        type: 'SET_TOURNAMENTS_DATA', 
+        payload: [...data, newItem],
+    };
+};
+
+export const changeTournamenPlace = async (oldData: any, tournamentData: any, place: string) => {
+    const newData = {...tournamentData, tournament_place: place};
+
+    return {
+        type: 'SET_TOURNAMENTS_DATA', 
+        payload: [...oldData, newData],
+    };
+};
+
+export const addTournamenMatch = async (oldData: any, tournamentData: any, values: any) => {
+    const newData = {...tournamentData, matchesData: [...tournamentData.matchesData, { date: moment(values.date).format('DD.MM.YYYY'), teams: `${values.team1} - ${values.team2}`, result: values.result }]};
+
+    return {
+        type: 'SET_TOURNAMENTS_DATA', 
+        payload: [...oldData, newData],
     };
 };
 

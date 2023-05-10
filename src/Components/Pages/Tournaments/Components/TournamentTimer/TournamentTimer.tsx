@@ -1,14 +1,22 @@
-import React from 'react';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../../types';
+
+import moment from 'moment';
 
 const Timer = (props: any) => {
+    const { tournamentsData } = useSelector((state: RootState) => state.tournaments);
+
+    const filteredData = tournamentsData.filter((item: {name: string}) => item.name === props.selectedTournament)[0];
+    
     const [days, setDays] = useState(0);
     const [hours, setHours] = useState(0);
     const [minutes, setMinutes] = useState(0);
     const [seconds, setSeconds] = useState(0);
-
-    const deadline = 'June, 1, 2023';
-
+    
+    //const dateStart = moment(filteredData.period[0]).format('MMMM, D, YYYY');
+    const deadline = moment(filteredData.period.split(' - ')[1]).format('MMMM, 1, YYYY');
+    
     const getTime = (deadline: string) => {
         const time = Date.parse(deadline) - Date.now();
 
