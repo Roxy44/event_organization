@@ -42,9 +42,9 @@ const Timer = (props: any) => {
     return (
         <div className='timer' >
             {endData >= 0 ? 
-                `To The End: ${days} д. ${hours} ч. ${minutes} м. ${seconds} с.`
+                `До конца регистрации: ${days} д. ${hours} ч. ${minutes} м. ${seconds} с.`
                 :
-                'To The End: 0 д. 0 ч. 0 м. 0 с.'
+                'До конца регистрации: 0 д. 0 ч. 0 м. 0 с.'
             }
         </div>
     );

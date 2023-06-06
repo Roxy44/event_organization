@@ -40,7 +40,7 @@ const Tournaments = () => {
         name: item.name,
         main: item.main,
         period: item.period,
-        notify: <></>,
+        notify: item,
     }));
 
     const columns: ColumnsType<TournamentsDataType> = [
@@ -63,7 +63,7 @@ const Tournaments = () => {
         {
             dataIndex: 'notify',
             key: 'notify',
-            render: () => <Button type='primary' style={!organizatorRole.includes(userRole) ? {display: 'none'} : {}}>Уведомить</Button>
+            render: (tournament) => <Button type='primary' disabled={tournament.tournament_place === ''} style={!organizatorRole.includes(userRole) ? {display: 'none'} : {}}>Уведомить</Button>
         },
     ];
     

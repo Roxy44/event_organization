@@ -3,7 +3,7 @@ const defaultState = {
         {
             name: 'Волейбол (М)',
             format: 'Студенты',
-            period: 'Jun 2024 - Feb 2024',
+            period: 'янв. 2023 - февр. 2023',
             main: 'ТУСУР',
             competitors: [
                 { 
@@ -91,7 +91,7 @@ const defaultState = {
                 },
             ],
             prize_pool: 12000,
-            tournament_place: '',
+            tournament_place: 'ТУСУР',
             matchesData: [
                 {
                     date: '20.04.2023',

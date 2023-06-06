@@ -2,6 +2,8 @@ import { db } from '../../Config/firebase';
 import { getDocs, collection, updateDoc, doc } from 'firebase/firestore';
 
 import moment from 'moment';
+import 'moment/locale/ru';
+
 const tournamentsCollectionRef = collection(db, 'tournaments');
 
 export const getTournamentsDataAction = async () => {
@@ -22,9 +24,9 @@ export const getTournamentsDataAction = async () => {
 
 export const changeTournamentsData = async (data: any, values: any) => {
     const newItem: any = { 
-        name: `${values.tournamentName} ${values.sportType ? '(М)' : '(Ж)'}`,
+        name: `${values.tournamentName} ${values.gender ? '(М)' : '(Ж)'}`,
         format: values.format,
-        period: `${moment(values.period[0]).format('MMM YYYY')} - ${moment(values.period[1]).format('MMM YYYY')}`,
+        period: `${moment(values.period[0]).locale('ru').format('MMM YYYY')} - ${moment(values.period[1]).locale('ru').format('MMM YYYY')}`,
         main: values.main,
         competitors: values.competitors.map((item: string) => ({
             name: item,

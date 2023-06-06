@@ -22,7 +22,7 @@ const defaultState = {
         }
     ],
     userRole: 'admin',
-    authorized: true,
+    authorized: false,
 };
 
 export const authorizationReducer = (state = defaultState, action: any) => {

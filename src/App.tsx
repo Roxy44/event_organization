@@ -25,14 +25,14 @@ const App = () => {
                 <Sider trigger={null} style={{ height: '100vh' }}>	
                     <Menu theme='dark' mode='inline'>
                         <Menu.Item key='0' className='logo' icon={TrophyIcon()} >
-                            <Link to='/event_organization'>Sport Organisation</Link>
-                        </Menu.Item> 
-                        {authorized && <>                             
-                            {data.map((item: any) => (
-                                <Menu.Item style={item.available.includes(userRole) ? {display: 'block'} : {display: 'none'}} key={item.key} icon={item.icon} >
-                                    <Link to={item.path}>{item.name}</Link>
-                                </Menu.Item>
-                            ))}
+                            <Link to='/event_organization'>Спартакиады</Link>
+                        </Menu.Item>                           
+                        {data.map((item: any) => (
+                            <Menu.Item style={item.available.includes(userRole) ? {display: 'block'} : {display: 'none'}} key={item.key} icon={item.icon} >
+                                <Link to={item.path}>{item.name}</Link>
+                            </Menu.Item>
+                        ))}
+                        {authorized &&   
                             <div className='menuItem'>
                                 <span>Роль:</span>
                                 <Select 
@@ -45,8 +45,7 @@ const App = () => {
                                     <Select.Option key={3} value='competitor'>Ответственный</Select.Option>
                                     <Select.Option key={4} value='user'>Пользователь</Select.Option>
                                 </Select>
-                            </div>
-                        </>    
+                            </div>    
                         }
                     </Menu>;
                 </Sider>

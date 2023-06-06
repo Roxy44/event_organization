@@ -4,20 +4,20 @@ const universities = [
         name: 'ТУСУР',
         main: 'Дмитрий И.И.',
         number: '8-800-555-35-35',
-        email: 'dimaivankov911@gmail.com',
+        email: 'myemail@gmail.com',
     },
     {
         id: 1,
         name: 'ТПУ',
         main: 'Семен В.А.',
-        number: '34-33-32',
+        number: '8-382-211-22-33',
         email: 'testemail@mail.ru',
     },
     {
         id: 2,
         name: 'ТГУ',
         main: 'Виктор А.С.',
-        number: '12-05-01',
+        number: '8-999-111-22-33',
         email: 'farmlesa@mail.ru',
     },
 ];

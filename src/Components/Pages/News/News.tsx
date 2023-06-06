@@ -27,68 +27,55 @@ const News = () => {
             dataIndex: 'columnThree',
             key: 'columnThree',
         },
-        {
-            dataIndex: 'columnFour',
-            key: 'columnFour',  
-        },
     ];
       
     const data: DataType[] = [
         {
-            key: 'news1',
+            key: 'row1',
             columnOne: 
-                <Card hoverable>
-                    <Meta title='News 1' description='description 1'/>
+                <Card hoverable className='superNews'>
+                    <Meta 
+                        title='Спартакиада «Моспром» в «Лужниках»' 
+                        description='Более 7000 зрителей посетили финал Спартакиады «Моспром» в «Лужниках»'
+                    />
                 </Card>,
             columnTwo: 
                 <Card hoverable>
-                    <Meta title='News 2' description='description 2'/>
+                    <Meta title='Новость 2' description='Описание 2'/>
                 </Card>,
             columnThree: 
                 <Card hoverable>
-                    <Meta title='News 3' description='description 3'/>
-                </Card>,
-            columnFour: 
-                <Card hoverable>
-                    <Meta title='News 4' description='description 4'/>
+                    <Meta title='Новость 3' description='Описание 3'/>
                 </Card>,
         },
         {
-            key: 'news2',
+            key: 'row2',
             columnOne: 
                 <Card hoverable>
-                    <Meta title='News 5' description='description 5'/>
+                    <Meta title='Новость 4' description='Описание 4'/>
                 </Card>,
             columnTwo: 
                 <Card hoverable>
-                    <Meta title='News 6' description='description 6'/>
+                    <Meta title='Новость 5' description='Описание 5'/>
                 </Card>,
             columnThree: 
                 <Card hoverable>
-                    <Meta title='News 7' description='description 7'/>
-                </Card>,
-            columnFour: 
-                <Card hoverable>
-                    <Meta title='News 8' description='description 8'/>
+                    <Meta title='Новость 6' description='Описание 6'/>
                 </Card>,
         },
         {
-            key: 'news3',
+            key: 'row3',
             columnOne: 
                 <Card hoverable>
-                    <Meta title='News 9' description='description 9'/>
+                    <Meta title='Новость 7' description='Описание 7'/>
                 </Card>,
             columnTwo: 
                 <Card hoverable>
-                    <Meta title='News 10' description='description 10'/>
+                    <Meta title='Новость 8' description='Описание 8'/>
                 </Card>,
             columnThree: 
                 <Card hoverable>
-                    <Meta title='News 11' description='description 11'/>
-                </Card>,
-            columnFour: 
-                <Card hoverable>
-                    <Meta title='News 12' description='description 12'/>
+                    <Meta title='Новость 9' description='Описание 9'/>
                 </Card>,
         },
     ];

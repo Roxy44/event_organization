@@ -25,8 +25,11 @@ const { Header, Content } = Layout;
 
 const TournamentComponent = () => {
     const { userRole } = useSelector((state: RootState) => state.authorization);
-    
+    const { tournamentsData } = useSelector((state: RootState) => state.tournaments);
+
     const { name } = useParams();
+
+    const filteredData = tournamentsData.filter((item: {name: string}) => item.name === name)[0];
 
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isRegestrationActive, setRegestrationStatus] = useState(true);
@@ -80,7 +83,7 @@ const TournamentComponent = () => {
                         <Button 
                             type='primary' 
                             className='registration'  
-                            style={!isRegestrationActive || !competitorRole.includes(userRole) ? {display: 'none'} : {display: 'block'}} onClick={showModal}>
+                            style={!isRegestrationActive || !competitorRole.includes(userRole) || filteredData.tournament_place !== '' ? {display: 'none'} : {display: 'block'}} onClick={showModal}>
                         Подтвердить регистрацию турнира
                         </Button>
                         <Timer endOfRegestration={() => endOfRegestration()} selectedTournament={name} />

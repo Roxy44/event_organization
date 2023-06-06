@@ -22,14 +22,14 @@ const routesData: RoutesTypes = [
     },  
     {
         key: 3,
-        name: 'Организация',
+        name: 'Вид спорта',
         path: '/event_organization/organization',
         icon: PlusSquareIcon(),
         available: organizatorRole,
     },                      
     {
         key: 4,
-        name: 'Турниры',
+        name: 'Спартакиады',
         path: '/event_organization/tournaments',
         icon: FlagIcon(),
         available: userRole,

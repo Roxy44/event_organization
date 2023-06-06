@@ -13,7 +13,6 @@ export interface DataType {
     columnOne: Object;
     columnTwo: Object;
     columnThree: Object;
-    columnFour: Object;
 }
 
 export interface UniversitiesDataType {

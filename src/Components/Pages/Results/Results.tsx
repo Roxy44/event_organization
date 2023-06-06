@@ -57,23 +57,24 @@ const Results = () => {
         }, 
     ];
 
-    const score = tournamentsData.map((item: any) => (
-        item.results.map((score: any) => (
-            score.scores.reduce((acc: any, curr: any) => acc + curr.winScore, 0)
-        ))
-    ));
+    // const score = tournamentsData.map((item: any) => (
+    //     item.results.map((score: any) => (
+    //         score.scores.reduce((acc: any, curr: any) => acc + curr.winScore, 0)
+    //     ))
+    // ));
 
     const tableData: any = universitiesData.map((university: any, uniIndex: number) => { 
         
         const newItem: any = {
             key: 'row1' + uniIndex,
             name: university.name,
-            result: '1',
+            result: uniIndex + 1,
+            score: uniIndex === 0 ? 7 : uniIndex === 1 ? 5 : 3,
         };
 
         tournamentsData.forEach((item: any, itemIndex: number) => {
             newItem['sport' + itemIndex] = item.results[uniIndex].scores.reduce((acc: any, curr: any) => acc + curr.winScore, 0);
-            newItem['score'] = score[itemIndex][uniIndex];
+            //newItem['score'] = score[itemIndex][uniIndex];
         });
 
         return newItem;

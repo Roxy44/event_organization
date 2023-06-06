@@ -6,6 +6,20 @@
     display: none !important;
 }
 
+.ant-table-cell {
+    width: 33%;
+}
+
+.ant-card-body {
+    height: 200px;
+}
+
+.superNews .ant-card-body {
+    background-image: url(https://img.championat.com/s/735x490/news/big/y/u/final-spartakiady-mosprom_1569244769116199044.jpg) !important;
+    background-repeat: no-repeat;
+    background-position: 50% 10%;
+}
+
 .news .ant-card-body {
     background-color: rgba(255, 230, 150, 1) !important;
 }

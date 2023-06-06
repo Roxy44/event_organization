@@ -46,18 +46,19 @@ const Organisation = () => {
                     form={form}
                     autoComplete='off'
                 >
-                    <Form.Item label='Вид соревнования' name='sportType' initialValue={true}>
-                        <Switch checkedChildren='Муж' unCheckedChildren='Жен' defaultChecked />
-                    </Form.Item>
+                    
                     <Form.Item label='Название турнира' name='tournamentName' rules={[{ required: true, message: '' }]}>
                         <Input placeholder='Введите название турнира' />
                     </Form.Item>
-                    <Form.Item label='Формат проведения' name='format' rules={[{ required: true, message: '' }]}>
-                        <Select 
+                    <Form.Item className='sportType' name='gender' initialValue={true}>
+                        <Switch checkedChildren='Муж' unCheckedChildren='Жен' defaultChecked />
+                    </Form.Item>
+                    <Form.Item className='sportFormat' name='format' label='Вид спорта' rules={[{ required: true, message: '' }]}>
+                        <Select
                             placeholder='Выберите формат проведения' 
                             options={[
                                 {value: 'Студенты'},
-                                {value: 'Профессора'},
+                                {value: 'Сотрудники'},
                                 {value: 'Свободный'},
                             ]}
                         />
