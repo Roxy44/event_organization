@@ -125,7 +125,8 @@ const TableComponent = (props: { tournamentName: string | undefined}) => {
                 <AddMatchModal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} tournamentsData={withoutFilteredData} filteredData={filteredData[0]} />
                 <Table className='tournamentStatistic' columns={columnsTable} dataSource={tableData} pagination={false} />
                 <div>
-                    <Button className='matchesButton' type='primary' onClick={() => setIsModalOpen(true)}>Добавить матч</Button>
+                    <Button className='matchesButton buttonAdd' type='primary' onClick={() => setIsModalOpen(true)}>Добавить матч</Button>
+                    <Button className='matchesButton'>Загрузить из файла</Button>
                 </div>
                 <Table className='matchStatistic' columns={columnsMatches} dataSource={matchesData} pagination={false} />
             </div>

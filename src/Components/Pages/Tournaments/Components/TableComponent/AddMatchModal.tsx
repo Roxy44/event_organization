@@ -38,7 +38,7 @@ const AddMatchModal = (props: any) => {
                 autoComplete='off'
             >   
                 <Form.Item label='Дата' name='date' rules={[{ required: true, message: '' }]}>
-                    <DatePicker format='DD.MM.YYYY'/>
+                    <DatePicker placeholder='Выберите дату' format='DD.MM.YYYY'/>
                 </Form.Item>
                 <Form.Item label='Команды'>
                     <Form.Item name='team1' rules={[{ required: true, message: '' }]}>

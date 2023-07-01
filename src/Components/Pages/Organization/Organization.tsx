@@ -64,7 +64,7 @@ const Organisation = () => {
                         />
                     </Form.Item>
                     <Form.Item label='Время проведения' name='period' rules={[{ required: true, message: '' }]}>
-                        <RangePicker format='DD.MM.YYYY'/>
+                        <RangePicker placeholder={['Дата начала', 'Дата окончания']} format='DD.MM.YYYY'/>
                     </Form.Item>
                     <Form.Item label='Ответственный за организацию' name='main' rules={[{ required: true, message: '' }]}>
                         <Select 

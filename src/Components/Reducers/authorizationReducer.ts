@@ -21,7 +21,7 @@ const defaultState = {
             role: 'user'
         }
     ],
-    userRole: 'admin',
+    userRole: 'user',
     authorized: false,
 };
 

@@ -14,9 +14,8 @@ const Timer = (props: any) => {
     const [minutes, setMinutes] = useState(0);
     const [seconds, setSeconds] = useState(0);
     
-    //const dateStart = moment(filteredData.period[0]).format('MMMM, D, YYYY');
-    const deadline = moment(filteredData.period.split(' - ')[1]).format('MMMM, 1, YYYY');
-    
+    const deadline = moment(filteredData.period?.split(' - ')[1], 'MMMM, 1, YYYY').locale('en').format('MMM, 1, YYYY');
+
     const getTime = (deadline: string) => {
         const time = Date.parse(deadline) - Date.now();
 

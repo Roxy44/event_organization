@@ -88,12 +88,14 @@ const Results = () => {
             </Header>
             <Content className='resultsContainer'>
                 {isLoading ? <Spin className='Loading' tip='Loading' size='large' />
-                    : <Table
+                    : 
+                    <Table
                         className='resultsList' 
                         columns={columnsTable}
                         dataSource={tableData}
                         pagination={false}
-                    />}
+                    />
+                }
             </Content>
         </Layout>
     );
